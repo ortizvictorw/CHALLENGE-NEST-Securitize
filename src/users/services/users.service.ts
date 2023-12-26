@@ -20,4 +20,16 @@ export class UsersService {
       throw new Error(error.message);
     }
   }
+
+  public async findUsers(): Promise<UsersEntity[]> {
+    try {
+      const users: UsersEntity[] = await this.userRepository.find();
+      if (users.length === 0) {
+        throw new Error('BAD_REQUEST');
+      }
+      return users;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }
