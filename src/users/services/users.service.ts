@@ -32,4 +32,33 @@ export class UsersService {
       throw new Error(error);
     }
   }
+
+  public async findBy({ key, value }: { key: keyof UserDTO; value: any }) {
+    try {
+      const user: UsersEntity = await this.userRepository
+        .createQueryBuilder('user')
+        .addSelect('user.password')
+        .where({ [key]: value })
+        .getOne();
+
+      return user;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  public async findUserById(id: number): Promise<UsersEntity> {
+    try {
+      const user: UsersEntity = await this.userRepository
+        .createQueryBuilder('user')
+        .where({ id })
+        .getOne();
+      if (!user) {
+        throw new Error('BAD_REQUEST');
+      }
+      return user;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }
