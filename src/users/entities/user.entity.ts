@@ -1,6 +1,8 @@
-import { BaseEntity, Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { IUser } from 'src/interfaces/user.interfaces';
+import { ReservationsEntity } from 'src/reservations/entities/reservation.entity';
+import { BaseEntity } from 'src/db/base.entities';
 
 @Entity({ name: 'users' })
 export class UsersEntity extends BaseEntity implements IUser {
@@ -22,4 +24,7 @@ export class UsersEntity extends BaseEntity implements IUser {
   @Exclude()
   @Column()
   password: string;
+
+  @OneToMany(() => ReservationsEntity, (reservation) => reservation.user)
+  reservations: ReservationsEntity[];
 }

@@ -54,7 +54,6 @@ export class UserUpdateDTO {
   @IsOptional()
   @IsString()
   username: string;
-
   @IsOptional()
   @IsString()
   password: string;
