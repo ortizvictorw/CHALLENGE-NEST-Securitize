@@ -21,19 +21,7 @@ export const DataSourceConfig: DataSourceOptions = {
   migrationsRun: true,
   logging: false,
   namingStrategy: new SnakeNamingStrategy(),
-};
-
-const DataSourceConfigDev: DataSourceOptions = {
-  ...DataSourceConfig,
-};
-
-const DataSourceConfigProd: DataSourceOptions = {
-  ...DataSourceConfig,
   ssl: true,
 };
 
-export const AppDS = new DataSource(
-  process.env.NODE_ENV === 'develop'
-    ? DataSourceConfigDev
-    : DataSourceConfigProd,
-);
+export const AppDS = new DataSource(DataSourceConfig);
