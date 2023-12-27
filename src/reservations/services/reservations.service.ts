@@ -17,4 +17,18 @@ export class ReservationsService {
       throw new Error(error.message);
     }
   }
+
+  public async findAllReservations(): Promise<ReservationsEntity[]> {
+    try {
+      const reservations: ReservationsEntity[] =
+        await this.reservationRepository.find({ relations: ['user'] });
+
+      if (reservations.length === 0) {
+        throw new Error('BAD_REQUEST');
+      }
+      return reservations;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }
