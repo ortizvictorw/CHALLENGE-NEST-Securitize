@@ -1,15 +1,17 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsDateString } from 'class-validator';
+import { IsNotEmpty, IsDate } from 'class-validator';
 
 export class ReservationDTO {
   @ApiProperty()
   @IsNotEmpty()
-  @IsDateString()
+  @IsDate()
   date: Date;
+
+  userId: number;
 }
 
 export class ReservationUpdateDTO {
   @ApiProperty()
-  @IsDateString()
+  @IsDate()
   date: Date;
 }
