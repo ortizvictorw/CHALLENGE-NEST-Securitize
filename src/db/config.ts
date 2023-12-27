@@ -10,6 +10,9 @@ const configService = new ConfigService();
 
 export const DataSourceConfig: DataSourceOptions = {
   type: 'postgres',
+  ssl: {
+    rejectUnauthorized: configService.get('POSTGRESS_SSL'),
+  },
   host: configService.get('DB_HOST'),
   port: configService.get('DB_PORT'),
   username: configService.get('DB_USER'),
@@ -21,14 +24,6 @@ export const DataSourceConfig: DataSourceOptions = {
   migrationsRun: true,
   logging: false,
   namingStrategy: new SnakeNamingStrategy(),
-  ssl: configService.get('POSTGRES_SSL'),
-  extra: {
-    ssl: configService.get('POSTGRES_SSL')
-      ? {
-          rejectUnauthorized: false,
-        }
-      : null,
-  },
 };
 
 export const AppDS = new DataSource(DataSourceConfig);
