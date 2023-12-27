@@ -29,7 +29,7 @@ const DataSourceConfigDev: DataSourceOptions = {
 
 const DataSourceConfigProd: DataSourceOptions = {
   ...DataSourceConfig,
-  ssl: configService.get('POSTGRESS_SSL'),
+  ssl: true,
 };
 
 export const AppDS = new DataSource(
