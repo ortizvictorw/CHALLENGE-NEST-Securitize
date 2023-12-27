@@ -21,14 +21,13 @@ export const DataSourceConfig: DataSourceOptions = {
   migrationsRun: true,
   logging: false,
   namingStrategy: new SnakeNamingStrategy(),
-  ssl: process.env.POSTGRES_SSL === 'true',
+  ssl: configService.get('POSTGRES_SSL'),
   extra: {
-    ssl:
-      process.env.POSTGRES_SSL === 'true'
-        ? {
-            rejectUnauthorized: false,
-          }
-        : null,
+    ssl: configService.get('POSTGRES_SSL')
+      ? {
+          rejectUnauthorized: false,
+        }
+      : null,
   },
 };
 
