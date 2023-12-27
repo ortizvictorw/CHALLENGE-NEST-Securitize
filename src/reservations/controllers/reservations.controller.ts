@@ -1,9 +1,10 @@
-import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ReservationsService } from '../services/reservations.service';
 import { ReservationDTO } from '../dto/reservation.dto';
 import { Request } from 'express';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { PublicAccess } from 'src/auth/decorator/public.decorator';
 
 @ApiTags('Reservations')
 @Controller('reservations')
@@ -16,7 +17,15 @@ export class ReservationsController {
     @Body() body: ReservationDTO,
     @Req() req: Request,
   ) {
-    body.userId = +req.idUser;
-    return await this.reservationsService.save(body);
+    return await this.reservationsService.save({
+      ...body,
+      userId: +req.userId,
+    });
+  }
+
+  @PublicAccess()
+  @Get()
+  public async findAllReservations() {
+    return await this.reservationsService.findAllReservations();
   }
 }
