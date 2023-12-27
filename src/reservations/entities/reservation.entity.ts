@@ -9,6 +9,9 @@ export class ReservationsEntity extends BaseEntity implements IReservation {
   date: Date;
 
   @Column()
+  phoneNumber: string;
+
+  @Column()
   userId: number;
 
   @ManyToOne(() => UsersEntity, (user) => user.reservations)
