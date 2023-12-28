@@ -21,7 +21,15 @@ export const DataSourceConfig: DataSourceOptions = {
   migrationsRun: true,
   logging: false,
   namingStrategy: new SnakeNamingStrategy(),
-  ssl: true,
+  ssl: configService.get('POSTGRES_SSL') === 'true',
+  extra: {
+    ssl:
+      configService.get('POSTGRES_SSL') === 'true'
+        ? {
+            rejectUnauthorized: false,
+          }
+        : null,
+  },
 };
 
 export const AppDS = new DataSource(DataSourceConfig);
