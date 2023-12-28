@@ -42,7 +42,7 @@ This project uses PostgreSQL with TypeORM as the ORM. Ensure the database is pro
 
 ## API Documentation
 
-The API endpoints are documented using Swagger UI. Access the API documentation at `/api`.
+The API endpoints are documented using Swagger UI. Access the API documentation [here](https://main-0uz2.onrender.com/docs).
 
 ## Deployment
 
