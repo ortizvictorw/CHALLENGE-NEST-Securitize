@@ -22,6 +22,7 @@ export const DataSourceConfig: DataSourceOptions = {
   migrationsRun: true,
   logging: false,
   namingStrategy: new SnakeNamingStrategy(),
+  ssl: true,
 };
 
 if (!isLocal) {
