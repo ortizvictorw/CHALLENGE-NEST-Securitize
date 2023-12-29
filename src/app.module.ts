@@ -4,7 +4,7 @@ import { ReservationsModule } from './reservations/reservations.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 
-import { DataSourceConfig } from './db/config';
+import { dataSourceOptions } from './db/config';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
@@ -15,7 +15,7 @@ import { AuthModule } from './auth/auth.module';
       envFilePath: `.${process.env.NODE_ENV}.env`,
       isGlobal: true,
     }),
-    TypeOrmModule.forRoot({ ...DataSourceConfig }),
+    TypeOrmModule.forRoot({ ...dataSourceOptions }),
     AuthModule,
   ],
   controllers: [],
