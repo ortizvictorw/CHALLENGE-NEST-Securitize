@@ -19,8 +19,9 @@ This API is responsible for handling various functionalities for the Securitize 
 
 1. Clone this repository.
 2. Install dependencies using `npm install`.
-3. Configure the database connection in the `.env` file.
+3. Run db docker - `docker compose up`
 4. Run the application in development mode using `npm run start:dev`.
+
 
 ## Available Scripts
 
