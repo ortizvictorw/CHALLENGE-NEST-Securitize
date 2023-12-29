@@ -9,7 +9,7 @@ ConfigModule.forRoot({
 const configService = new ConfigService();
 const isLocal = Boolean(configService.get('POSTGRESS_SSL') === 'false');
 
-export const DataSourceConfig: DataSourceOptions = {
+let dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
   host: configService.get('DB_HOST'),
   port: configService.get('DB_PORT'),
@@ -22,11 +22,12 @@ export const DataSourceConfig: DataSourceOptions = {
   migrationsRun: true,
   logging: false,
   namingStrategy: new SnakeNamingStrategy(),
-  ssl: true,
 };
 
 if (!isLocal) {
-  delete (DataSourceConfig as any).ssl;
+  dataSourceOptions = {
+    ...dataSourceOptions,
+    ssl: true,
+  };
 }
-
-export const AppDS = new DataSource(DataSourceConfig);
+export const AppDS = new DataSource(dataSourceOptions);
