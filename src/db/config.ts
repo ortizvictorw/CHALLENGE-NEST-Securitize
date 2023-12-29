@@ -6,6 +6,7 @@ ConfigModule.forRoot({
   envFilePath: `.${process.env.NODE_ENV}.env`,
 });
 
+const isLocal = process.env.NODE_ENV === 'local';
 const configService = new ConfigService();
 
 export const DataSourceConfig: DataSourceOptions = {
@@ -21,7 +22,10 @@ export const DataSourceConfig: DataSourceOptions = {
   migrationsRun: true,
   logging: false,
   namingStrategy: new SnakeNamingStrategy(),
-  ssl: true,
 };
+
+if (!isLocal) {
+  delete (DataSourceConfig as any).ssl;
+}
 
 export const AppDS = new DataSource(DataSourceConfig);
