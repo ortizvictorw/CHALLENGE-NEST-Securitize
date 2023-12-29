@@ -6,8 +6,8 @@ ConfigModule.forRoot({
   envFilePath: `.${process.env.NODE_ENV}.env`,
 });
 
-const isLocal = process.env.NODE_ENV === 'local';
 const configService = new ConfigService();
+const isLocal = configService.get('NODE_ENV') === 'develop';
 
 export const DataSourceConfig: DataSourceOptions = {
   type: 'postgres',
