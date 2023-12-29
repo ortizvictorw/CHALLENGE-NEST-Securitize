@@ -7,7 +7,7 @@ ConfigModule.forRoot({
 });
 
 const configService = new ConfigService();
-const isLocal = configService.get('POSTGRESS_SSL') === 'false';
+const isLocal = Boolean(configService.get('POSTGRESS_SSL') === 'false');
 
 export const DataSourceConfig: DataSourceOptions = {
   type: 'postgres',
